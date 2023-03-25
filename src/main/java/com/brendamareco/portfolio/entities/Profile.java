@@ -17,6 +17,8 @@ public class Profile {
     String welcomeText;
     String description;
     String role;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
     Owner owner;
 
     public Profile() {}
@@ -30,5 +32,17 @@ public class Profile {
         this.description = description;
         this.role = role;
         this.owner = owner;
+    }
+
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "id=" + id +
+                ", thumbnail='" + thumbnail + '\'' +
+                ", welcomeText='" + welcomeText + '\'' +
+                ", description='" + description + '\'' +
+                ", role='" + role + '\'' +
+                ", owner=" + owner +
+                '}';
     }
 }

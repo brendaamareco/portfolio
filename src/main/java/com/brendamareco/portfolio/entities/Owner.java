@@ -27,4 +27,15 @@ public class Owner {
         this.country = country;
         this.province = province;
     }
+
+    @Override
+    public String toString() {
+        return "Owner{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", country='" + country + '\'' +
+                ", province='" + province + '\'' +
+                '}';
+    }
 }

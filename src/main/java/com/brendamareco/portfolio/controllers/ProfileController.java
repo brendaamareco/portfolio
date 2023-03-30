@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200/")
 public class ProfileController {
 
     private ProfileRepository repository;
@@ -14,7 +15,7 @@ public class ProfileController {
         this.repository = repository;
     }
 
-    @GetMapping("/profiles/{id}")
+    @GetMapping("/api/profiles/{id}")
     public ResponseEntity<Profile> findById(@PathVariable Long id)
     {
         return repository.findById(id)
@@ -22,7 +23,7 @@ public class ProfileController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/profiles")
+    @PutMapping("/api/profiles")
     public ResponseEntity<Profile> update(@RequestBody Profile profile)
     {
         if (profile == null)

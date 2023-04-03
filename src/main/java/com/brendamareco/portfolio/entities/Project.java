@@ -16,19 +16,18 @@ public class Project
     private String title;
     private String description;
     private String thumbnail;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "owner_id", referencedColumnName = "id")
-    private Owner owner;
+    @Column(name = "`project_url`")
+    private String projectUrl;
 
     public Project() {}
 
     public Project(Long id, String title, String description,
-                   String thumbnail, Owner owner)
+                   String thumbnail, String projectUrl)
     {
         this.id = id;
         this.title = title;
         this.description = description;
         this.thumbnail = thumbnail;
-        this.owner = owner;
+        this.projectUrl = projectUrl;
     }
 }

@@ -40,8 +40,6 @@ public class ProjectController
         boolean invalidTitle = project.getTitle() == null
                 || project.getTitle().length() > 32;
 
-        boolean invalidOwner = project.getOwner() == null;
-
-        return invalidId || invalidTitle || invalidOwner;
+        return invalidId || invalidTitle;
     }
 }

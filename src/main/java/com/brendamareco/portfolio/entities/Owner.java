@@ -17,15 +17,27 @@ public class Owner {
     String lastName;
     String country;
     String province;
+    String thumbnail;
+    @Column(name = "welcome_text")
+    String welcomeText;
+    String description;
+    String role;
 
     public Owner() {}
 
-    public Owner(Long id, String name, String lastName, String country, String province) {
+    public Owner(Long id, String name, String lastName, String country,
+                 String province, String thumbnail, String welcomeText,
+                 String description, String role)
+    {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.country = country;
         this.province = province;
+        this.thumbnail = thumbnail;
+        this.welcomeText = welcomeText;
+        this.description = description;
+        this.role = role;
     }
 
     @Override
@@ -36,6 +48,10 @@ public class Owner {
                 ", lastName='" + lastName + '\'' +
                 ", country='" + country + '\'' +
                 ", province='" + province + '\'' +
+                ", thumbnail='" + thumbnail + '\'' +
+                ", welcomeText='" + welcomeText + '\'' +
+                ", description='" + description + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

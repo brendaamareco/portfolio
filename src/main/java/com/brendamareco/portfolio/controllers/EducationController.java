@@ -12,7 +12,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200/")
 public class EducationController
 {
-    private final String ROOT_URL = "http://localhost:8080/api/";
+    private final String ROOT_URL = "/api/";
     private EducationRepository educationRepository;
 
     public EducationController(EducationRepository educationRepository) {

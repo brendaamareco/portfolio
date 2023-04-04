@@ -60,7 +60,11 @@ public class ProjectController
         if ( !existentProject )
             return ResponseEntity.notFound().build();
         else
+        {
+            this.projectRepository.deleteById(projectId);
             return ResponseEntity.noContent().build();
+        }
+
     }
 
     private boolean invalidProject(Project project)

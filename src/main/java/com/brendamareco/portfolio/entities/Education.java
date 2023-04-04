@@ -15,6 +15,7 @@ public class Education
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    String institution;
     String title;
     String description;
     String thumbnail;

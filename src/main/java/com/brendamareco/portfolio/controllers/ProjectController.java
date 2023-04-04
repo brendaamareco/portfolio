@@ -27,19 +27,34 @@ public class ProjectController
     @PostMapping("/api/projects")
     public ResponseEntity<Project> add(@RequestBody Project project)
     {
-        if ( this.invalidProject(project) )
+        boolean invalidId = project.getId() != null;
+
+        if ( invalidId || this.invalidProject(project) )
             return ResponseEntity.badRequest().build();
         else
             return ResponseEntity.ok(this.projectRepository.save(project));
     }
 
+    @PutMapping("/api/projects")
+    public ResponseEntity<Project> update(@RequestBody Project project)
+    {
+        boolean invalidId = project.getId() == null;
+        boolean existentProject = this.projectRepository.existsById(project.getId());
+
+        if ( !existentProject)
+            return ResponseEntity.notFound().build();
+        if ( invalidId || this.invalidProject(project) )
+            return ResponseEntity.badRequest().build();
+        else
+            return ResponseEntity.ok(this.projectRepository.save(project));
+    }
+
+
     private boolean invalidProject(Project project)
     {
-        boolean invalidId = project.getId() != null;
-
         boolean invalidTitle = project.getTitle() == null
                 || project.getTitle().length() > 32;
 
-        return invalidId || invalidTitle;
+        return invalidTitle;
     }
 }

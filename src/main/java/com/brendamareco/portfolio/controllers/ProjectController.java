@@ -49,6 +49,19 @@ public class ProjectController
             return ResponseEntity.ok(this.projectRepository.save(project));
     }
 
+    @DeleteMapping("/api/projects/{projectId}")
+    public ResponseEntity<Project> delete(@PathVariable Long projectId)
+    {
+        boolean invalidId = projectId == null;
+        boolean existentProject = this.projectRepository.existsById(projectId);
+
+        if ( invalidId )
+            return ResponseEntity.badRequest().build();
+        if ( !existentProject )
+            return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.noContent().build();
+    }
 
     private boolean invalidProject(Project project)
     {

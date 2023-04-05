@@ -36,7 +36,8 @@ public class EducationController
 
     private boolean validEducation(Education education)
     {
-        return education.getTitle() != null
+        return  education.getInstitution() != null
+                && education.getTitle() != null
                 && education.getStartDate() != null
                 && education.getEndDate() != null;
     }

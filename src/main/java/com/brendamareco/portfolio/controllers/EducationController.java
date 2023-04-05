@@ -2,9 +2,8 @@ package com.brendamareco.portfolio.controllers;
 
 import com.brendamareco.portfolio.entities.Education;
 import com.brendamareco.portfolio.repositories.EducationRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,10 +17,27 @@ public class EducationController
     public EducationController(EducationRepository educationRepository) {
         this.educationRepository = educationRepository;
     }
-
     @GetMapping(ROOT_URL + "education")
     public List<Education> getEducationList()
     {
         return this.educationRepository.findAll();
+    }
+
+    @PostMapping(ROOT_URL + "education")
+    public ResponseEntity<Education> add(@RequestBody Education education)
+    {
+        boolean validId = education.getId() == null;
+
+        if ( !validId || !this.validEducation(education) )
+            return ResponseEntity.badRequest().build();
+        else
+            return ResponseEntity.ok(education);
+    }
+
+    private boolean validEducation(Education education)
+    {
+        return education.getTitle() != null
+                && education.getStartDate() != null
+                && education.getEndDate() != null;
     }
 }

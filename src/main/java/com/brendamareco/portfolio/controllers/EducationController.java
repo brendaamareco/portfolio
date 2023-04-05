@@ -31,7 +31,10 @@ public class EducationController
         if ( !validId || !this.validEducation(education) )
             return ResponseEntity.badRequest().build();
         else
+        {
+            this.educationRepository.save(education);
             return ResponseEntity.ok(education);
+        }
     }
 
     private boolean validEducation(Education education)

@@ -30,6 +30,25 @@ public class EducationController
 
         if ( !validId || !this.validEducation(education) )
             return ResponseEntity.badRequest().build();
+
+        else
+        {
+            this.educationRepository.save(education);
+            return ResponseEntity.ok(education);
+        }
+    }
+
+    @PutMapping(ROOT_URL + "education")
+    public ResponseEntity<Education> update(@RequestBody Education education)
+    {
+        boolean validId = education.getId() != null;
+
+        if ( !validId || !this.validEducation(education) )
+            return ResponseEntity.badRequest().build();
+
+        if ( !this.educationRepository.existsById(education.getId()))
+            return ResponseEntity.notFound().build();
+
         else
         {
             this.educationRepository.save(education);

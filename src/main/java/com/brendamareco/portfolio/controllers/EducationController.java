@@ -56,6 +56,23 @@ public class EducationController
         }
     }
 
+    @DeleteMapping(ROOT_URL + "education/{educationId}")
+    public ResponseEntity<Education> delete(@PathVariable Long educationId)
+    {
+        boolean validId = educationId != null;
+
+        if (!validId)
+            return ResponseEntity.badRequest().build();
+
+        if (!educationRepository.existsById(educationId))
+            return ResponseEntity.notFound().build();
+        else
+        {
+            educationRepository.deleteById(educationId);
+            return ResponseEntity.noContent().build();
+        }
+    }
+
     private boolean validEducation(Education education)
     {
         return  education.getInstitution() != null

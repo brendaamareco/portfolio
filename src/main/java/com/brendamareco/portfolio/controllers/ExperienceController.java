@@ -39,6 +39,24 @@ public class ExperienceController
         }
     }
 
+    @PutMapping(ROOT_URL + "experience")
+    public ResponseEntity<Experience> update(@RequestBody Experience experience)
+    {
+        boolean validId = experience.getId() != null;
+
+        if (!validId || !validExperience(experience))
+            return ResponseEntity.badRequest().build();
+
+        if (!this.experienceRepository.existsById(experience.getId()))
+            return ResponseEntity.notFound().build();
+
+        else
+        {
+            this.experienceRepository.save(experience);
+            return ResponseEntity.ok(experience);
+        }
+    }
+
     private boolean validExperience(Experience experience)
     {
         return experience.getCompanyName() != null

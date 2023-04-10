@@ -17,7 +17,7 @@ public class SkillController
     private SkillRepository skillRepository;
     private final String ROOT_URL = "/api/";
 
-    @GetMapping(ROOT_URL + "skill")
+    @GetMapping(ROOT_URL + "skills")
     public List<Skill> getAll()
     {
         return this.skillRepository.findAll();

@@ -1,15 +1,15 @@
 package com.brendamareco.portfolio.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "`education`")
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Education
 {
     @Id
@@ -23,17 +23,4 @@ public class Education
     Date startDate;
     @Column(name = "`end_date`")
     Date endDate;
-
-    public Education() {}
-
-    public Education(Long id, String title, String description,
-                     String thumbnail, Date startDate, Date endDate)
-    {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.thumbnail = thumbnail;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
 }

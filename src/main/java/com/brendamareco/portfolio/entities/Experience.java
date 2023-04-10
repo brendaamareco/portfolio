@@ -1,15 +1,15 @@
 package com.brendamareco.portfolio.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "`experience`")
-@Setter
-@Getter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Experience
 {
     @Id
@@ -24,19 +24,4 @@ public class Experience
     Date endDate;
     @Column(name = "`company_name`")
     String companyName;
-
-    public Experience() {}
-
-    public Experience(Long id, String title, String description,
-                      String thumbnail, Date startDate, Date endDate,
-                      String companyName)
-    {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.thumbnail = thumbnail;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.companyName = companyName;
-    }
 }

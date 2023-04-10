@@ -57,6 +57,24 @@ public class ExperienceController
         }
     }
 
+    @DeleteMapping(ROOT_URL + "experience/{experienceId}")
+    public ResponseEntity<Experience> delete(@PathVariable Long experienceId)
+    {
+        boolean validId = experienceId != null;
+
+        if (!validId)
+            return ResponseEntity.badRequest().build();
+
+        if (!this.experienceRepository.existsById(experienceId))
+            return ResponseEntity.notFound().build();
+
+        else
+        {
+            this.experienceRepository.deleteById(experienceId);
+            return ResponseEntity.noContent().build();
+        }
+    }
+
     private boolean validExperience(Experience experience)
     {
         return experience.getCompanyName() != null

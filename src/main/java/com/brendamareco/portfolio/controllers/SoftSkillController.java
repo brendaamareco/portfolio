@@ -1,7 +1,7 @@
 package com.brendamareco.portfolio.controllers;
 
-import com.brendamareco.portfolio.entities.Skill;
-import com.brendamareco.portfolio.repositories.SkillRepository;
+import com.brendamareco.portfolio.entities.SoftSkill;
+import com.brendamareco.portfolio.repositories.SoftSkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,15 +11,15 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
-public class SkillController
+public class SoftSkillController
 {
     @Autowired
-    private SkillRepository skillRepository;
+    private SoftSkillRepository softSkillRepository;
     private final String ROOT_URL = "/api/";
 
-    @GetMapping(ROOT_URL + "skills")
-    public List<Skill> getAll()
+    @GetMapping(ROOT_URL + "soft-skills")
+    public List<SoftSkill> getAll()
     {
-        return this.skillRepository.findAll();
+        return this.softSkillRepository.findAll();
     }
 }

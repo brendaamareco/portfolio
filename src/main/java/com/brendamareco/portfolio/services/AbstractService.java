@@ -1,5 +1,6 @@
-package com.brendamareco.portfolio.interfaces;
+package com.brendamareco.portfolio.services;
 
+import com.brendamareco.portfolio.interfaces.IEntity;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;

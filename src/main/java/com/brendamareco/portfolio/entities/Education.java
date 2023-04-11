@@ -2,7 +2,9 @@ package com.brendamareco.portfolio.entities;
 
 import com.brendamareco.portfolio.embeddables.DateRange;
 import com.brendamareco.portfolio.interfaces.IEntity;
+import com.brendamareco.portfolio.validators.ValidDateRange;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
@@ -40,5 +42,7 @@ public class Education implements IEntity<Long>
             @AttributeOverride(name = "startDate", column = @Column(name = "`start_date`")),
             @AttributeOverride(name = "endDate", column = @Column(name = "`end_date`"))
     })
+    @Valid
+    @ValidDateRange
     private DateRange dateRange;
 }

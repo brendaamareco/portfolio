@@ -45,7 +45,11 @@ public abstract class AbstractService<T extends IEntity<ID>,ID, S extends JpaRep
     }
 
     public void deleteById(ID id)
+
     {
+        if (!this.repository.existsById(id))
+            throw new EntityNotFoundException();
+
         this.repository.deleteById(id);
     }
 

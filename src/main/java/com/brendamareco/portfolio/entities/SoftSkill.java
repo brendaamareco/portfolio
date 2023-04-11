@@ -1,5 +1,6 @@
 package com.brendamareco.portfolio.entities;
 
+import com.brendamareco.portfolio.interfaces.GeneralEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SoftSkill
+public class SoftSkill implements GeneralEntity<Long>
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

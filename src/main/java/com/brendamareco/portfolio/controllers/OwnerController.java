@@ -1,33 +1,28 @@
 package com.brendamareco.portfolio.controllers;
 
 import com.brendamareco.portfolio.entities.Owner;
-import com.brendamareco.portfolio.repositories.OwnerRepository;
+import com.brendamareco.portfolio.services.OwnerService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
-public class OwnerController {
+public class OwnerController
+{
+    private final String ROOT_URL = "/api/owner";
+    @Autowired private OwnerService ownerService;
 
-    private OwnerRepository repository;
-
-    public OwnerController(OwnerRepository repository) {
-        this.repository = repository;
-    }
-
-    @GetMapping("/api/owner")
-    public Owner find()
+    @GetMapping(ROOT_URL)
+    public Owner get()
     {
-        return repository.findAll().get(0);
+        return ownerService.getAll().get(0);
     }
 
-    @PutMapping("/api/owner")
-    public ResponseEntity<Owner> update(@RequestBody Owner owner)
+    @PutMapping(ROOT_URL)
+    public ResponseEntity<Owner> update(@RequestBody @Valid Owner owner)
     {
-        if (!repository.existsById(owner.getId()))
-            return ResponseEntity.notFound().build();
-        else
-            return ResponseEntity.ok(repository.save(owner));
+        return ResponseEntity.ok(this.ownerService.update(owner.getId(), owner));
     }
-
 }

@@ -1,7 +1,9 @@
 package com.brendamareco.portfolio.controllers;
 
 import com.brendamareco.portfolio.entities.Project;
-import com.brendamareco.portfolio.repositories.ProjectRepository;
+import com.brendamareco.portfolio.services.ProjectService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,67 +13,32 @@ import java.util.List;
 @RestController
 public class ProjectController
 {
-    private ProjectRepository projectRepository;
+    private final String ROOT_URL = "/api/projects";
+    @Autowired private ProjectService projectService;
 
-    public ProjectController(ProjectRepository projectRepository)
-    {
-        this.projectRepository = projectRepository;
-    }
-
-    @GetMapping("/api/projects")
+    @GetMapping(ROOT_URL)
     public List<Project> getAll()
     {
-        return this.projectRepository.findAll();
+        return this.projectService.getAll();
     }
 
-    @PostMapping("/api/projects")
-    public ResponseEntity<Project> add(@RequestBody Project project)
+    @PostMapping(ROOT_URL)
+    public ResponseEntity<Project> add(@RequestBody @Valid Project project)
     {
-        boolean invalidId = project.getId() != null;
-
-        if ( invalidId || this.invalidProject(project) )
-            return ResponseEntity.badRequest().build();
-        else
-            return ResponseEntity.ok(this.projectRepository.save(project));
+        return ResponseEntity.ok(this.projectService.add(project));
     }
 
-    @PutMapping("/api/projects")
-    public ResponseEntity<Project> update(@RequestBody Project project)
+    @PutMapping(ROOT_URL)
+    public ResponseEntity<Project> update(@RequestBody @Valid Project project)
     {
-        boolean invalidId = project.getId() == null;
-        boolean existentProject = this.projectRepository.existsById(project.getId());
-
-        if ( !existentProject)
-            return ResponseEntity.notFound().build();
-        if ( invalidId || this.invalidProject(project) )
-            return ResponseEntity.badRequest().build();
-        else
-            return ResponseEntity.ok(this.projectRepository.save(project));
+        return ResponseEntity.ok(this.projectService.update(project.getId(), project));
     }
 
-    @DeleteMapping("/api/projects/{projectId}")
+    @DeleteMapping(ROOT_URL + "/{projectId}")
     public ResponseEntity<Project> delete(@PathVariable Long projectId)
     {
-        boolean invalidId = projectId == null;
-        boolean existentProject = this.projectRepository.existsById(projectId);
-
-        if ( invalidId )
-            return ResponseEntity.badRequest().build();
-        if ( !existentProject )
-            return ResponseEntity.notFound().build();
-        else
-        {
-            this.projectRepository.deleteById(projectId);
-            return ResponseEntity.noContent().build();
-        }
-
+        this.projectService.deleteById(projectId);
+        return ResponseEntity.noContent().build();
     }
 
-    private boolean invalidProject(Project project)
-    {
-        boolean invalidTitle = project.getTitle() == null
-                || project.getTitle().length() > 32;
-
-        return invalidTitle;
-    }
 }

@@ -1,6 +1,6 @@
 package com.brendamareco.portfolio.entities;
 
-import com.brendamareco.portfolio.interfaces.GeneralEntity;
+import com.brendamareco.portfolio.interfaces.IEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -11,7 +11,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Owner implements GeneralEntity<Long>
+public class Owner implements IEntity<Long>
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

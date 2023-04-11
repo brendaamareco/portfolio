@@ -1,6 +1,6 @@
 package com.brendamareco.portfolio.interfaces;
 
-public interface GeneralEntity<ID>
+public interface IEntity<ID>
 {
     public ID getId();
     public void setId(ID id);

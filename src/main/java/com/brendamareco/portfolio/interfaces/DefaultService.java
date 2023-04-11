@@ -1,6 +1,5 @@
 package com.brendamareco.portfolio.interfaces;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public abstract class DefaultService<T extends GeneralEntity<ID>,ID, S extends JpaRepository<T,ID>>
+public abstract class DefaultService<T extends IEntity<ID>,ID, S extends JpaRepository<T,ID>>
 {
     @Autowired S repository;
 

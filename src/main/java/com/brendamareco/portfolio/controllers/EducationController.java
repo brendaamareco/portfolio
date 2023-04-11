@@ -1,7 +1,9 @@
 package com.brendamareco.portfolio.controllers;
 
 import com.brendamareco.portfolio.entities.Education;
-import com.brendamareco.portfolio.repositories.EducationRepository;
+import com.brendamareco.portfolio.services.EducationService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,73 +13,32 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200/")
 public class EducationController
 {
-    private final String ROOT_URL = "/api/";
-    private EducationRepository educationRepository;
+    private final String ROOT_URL = "/api/education";
+    @Autowired private EducationService educationService;
 
-    public EducationController(EducationRepository educationRepository) {
-        this.educationRepository = educationRepository;
-    }
-    @GetMapping(ROOT_URL + "education")
+    @GetMapping(ROOT_URL)
     public List<Education> getEducationList()
     {
-        return this.educationRepository.findAll();
+        return this.educationService.getAll();
     }
 
-    @PostMapping(ROOT_URL + "education")
-    public ResponseEntity<Education> add(@RequestBody Education education)
+    @PostMapping(ROOT_URL)
+    public ResponseEntity<Education> add(@RequestBody @Valid Education education)
     {
-        boolean validId = education.getId() == null;
-
-        if ( !validId || !this.validEducation(education) )
-            return ResponseEntity.badRequest().build();
-
-        else
-        {
-            this.educationRepository.save(education);
-            return ResponseEntity.ok(education);
-        }
+        return ResponseEntity.ok(this.educationService.add(education));
     }
 
-    @PutMapping(ROOT_URL + "education")
-    public ResponseEntity<Education> update(@RequestBody Education education)
+    @PutMapping(ROOT_URL)
+    public ResponseEntity<Education> update(@RequestBody @Valid Education education)
     {
-        boolean validId = education.getId() != null;
-
-        if ( !validId || !this.validEducation(education) )
-            return ResponseEntity.badRequest().build();
-
-        if ( !this.educationRepository.existsById(education.getId()))
-            return ResponseEntity.notFound().build();
-
-        else
-        {
-            this.educationRepository.save(education);
-            return ResponseEntity.ok(education);
-        }
+        return ResponseEntity.ok(this.educationService.update(education));
     }
 
-    @DeleteMapping(ROOT_URL + "education/{educationId}")
+    @DeleteMapping(ROOT_URL + "/{educationId}")
     public ResponseEntity<Education> delete(@PathVariable Long educationId)
     {
-        boolean validId = educationId != null;
-
-        if (!validId)
-            return ResponseEntity.badRequest().build();
-
-        if (!educationRepository.existsById(educationId))
-            return ResponseEntity.notFound().build();
-        else
-        {
-            educationRepository.deleteById(educationId);
-            return ResponseEntity.noContent().build();
-        }
+       this.educationService.deleteById(educationId);
+       return ResponseEntity.noContent().build();
     }
 
-    private boolean validEducation(Education education)
-    {
-        return  education.getInstitution() != null
-                && education.getTitle() != null
-                && education.getStartDate() != null
-                && education.getEndDate() != null;
-    }
 }

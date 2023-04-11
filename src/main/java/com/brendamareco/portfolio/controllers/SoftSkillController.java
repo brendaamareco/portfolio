@@ -1,7 +1,6 @@
 package com.brendamareco.portfolio.controllers;
 
 import com.brendamareco.portfolio.entities.SoftSkill;
-import com.brendamareco.portfolio.repositories.SoftSkillRepository;
 import com.brendamareco.portfolio.services.SoftSkillService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public abstract class DefaultService<T extends IEntity<ID>,ID, S extends JpaRepository<T,ID>>
+public abstract class AbstractService<T extends IEntity<ID>,ID, S extends JpaRepository<T,ID>>
 {
     @Autowired S repository;
 

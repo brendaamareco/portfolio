@@ -1,13 +1,12 @@
 package com.brendamareco.portfolio.entities;
 
+import com.brendamareco.portfolio.embeddables.DateRange;
 import com.brendamareco.portfolio.interfaces.IEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
-import java.util.Date;
 
 @Entity
 @Table(name = "`experience`")
@@ -30,12 +29,14 @@ public class Experience implements IEntity<Long>
     @Pattern(regexp = "^.{0,2048}$",
             message = "Thumbnail URL length must be less than 2048")
     String thumbnail;
-    @Column(name = "`start_date`")
-    @NotNull
-    Date startDate;
-    @Column(name = "`end_date`")
-    @NotNull
-    Date endDate;
+
+    @Embedded
+    @AttributeOverrides(value = {
+            @AttributeOverride(name = "startDate", column = @Column(name = "`start_date`")),
+            @AttributeOverride(name = "endDate", column = @Column(name = "`end_date`"))
+    })
+    DateRange dateRange;
+
     @Column(name = "`company_name`")
     @NotBlank
     @Pattern(regexp = "^.{1,64}$",

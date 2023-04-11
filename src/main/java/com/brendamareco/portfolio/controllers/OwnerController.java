@@ -23,6 +23,6 @@ public class OwnerController
     @PutMapping(ROOT_URL)
     public ResponseEntity<Owner> update(@RequestBody @Valid Owner owner)
     {
-        return ResponseEntity.ok(this.ownerService.update(owner.getId(), owner));
+        return ResponseEntity.ok(this.ownerService.update(owner));
     }
 }

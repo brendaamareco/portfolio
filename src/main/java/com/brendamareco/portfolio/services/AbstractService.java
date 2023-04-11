@@ -8,6 +8,7 @@ import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.HashSet;
 import java.util.List;
@@ -22,17 +23,21 @@ public abstract class AbstractService<T extends IEntity<ID>,ID, S extends JpaRep
     {
         return this.repository.findAll();
     }
+
     public T add(T entity)
     {
         entity.setId(null);
         return this.repository.save(entity);
     }
 
-    public T update(ID id, T entity)
+    public T update(T entity)
     {
+        if (entity.getId() == null)
+            throw new IllegalArgumentException("Entity id must not be null");
+
         T existingEntity = repository
-                .findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Entity not found with id: " + id));
+                .findById(entity.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Entity not found with id: " + entity.getId()));
 
         BeanUtils.copyProperties(entity, existingEntity, getNullPropertyNames(entity));
 
@@ -44,7 +49,8 @@ public abstract class AbstractService<T extends IEntity<ID>,ID, S extends JpaRep
         this.repository.deleteById(id);
     }
 
-    protected String[] getNullPropertyNames(T source) {
+    protected String[] getNullPropertyNames(T source)
+    {
         final BeanWrapper src = new BeanWrapperImpl(source);
         java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();
 

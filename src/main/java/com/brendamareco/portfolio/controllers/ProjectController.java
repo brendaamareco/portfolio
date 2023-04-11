@@ -31,7 +31,7 @@ public class ProjectController
     @PutMapping(ROOT_URL)
     public ResponseEntity<Project> update(@RequestBody @Valid Project project)
     {
-        return ResponseEntity.ok(this.projectService.update(project.getId(), project));
+        return ResponseEntity.ok(this.projectService.update(project));
     }
 
     @DeleteMapping(ROOT_URL + "/{projectId}")

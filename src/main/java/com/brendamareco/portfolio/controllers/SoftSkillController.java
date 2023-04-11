@@ -2,10 +2,10 @@ package com.brendamareco.portfolio.controllers;
 
 import com.brendamareco.portfolio.entities.SoftSkill;
 import com.brendamareco.portfolio.repositories.SoftSkillRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,4 +22,13 @@ public class SoftSkillController
     {
         return this.softSkillRepository.findAll();
     }
+
+    @PostMapping(ROOT_URL + "soft-skills")
+    public ResponseEntity<SoftSkill> add(@RequestBody @Valid SoftSkill softSkill)
+    {
+        this.softSkillRepository.save(softSkill);
+
+        return ResponseEntity.ok(softSkill);
+    }
+
 }

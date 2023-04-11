@@ -17,7 +17,7 @@ import java.util.Set;
 @Service
 public abstract class AbstractService<T extends IEntity<ID>,ID, S extends JpaRepository<T,ID>>
 {
-    @Autowired S repository;
+    @Autowired private S repository;
 
     public List<T> getAll()
     {

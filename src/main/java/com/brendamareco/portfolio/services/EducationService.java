@@ -5,4 +5,10 @@ import com.brendamareco.portfolio.repositories.EducationRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EducationService extends AbstractService<Education, Long, EducationRepository> { }
+public class EducationService extends AbstractService<Education, Long>
+{
+    public EducationService(EducationRepository repository)
+    {
+        super(repository);
+    }
+}

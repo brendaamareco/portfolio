@@ -5,4 +5,10 @@ import com.brendamareco.portfolio.repositories.OwnerRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OwnerService extends AbstractService<Owner, Long, OwnerRepository> { }
+public class OwnerService extends AbstractService<Owner, Long>
+{
+    public OwnerService(OwnerRepository repository)
+    {
+        super(repository);
+    }
+}

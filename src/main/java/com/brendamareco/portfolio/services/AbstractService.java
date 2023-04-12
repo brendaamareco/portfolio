@@ -5,19 +5,17 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
 
 import java.beans.PropertyDescriptor;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-@Service
-public abstract class AbstractService<T extends IEntity<ID>,ID, S extends JpaRepository<T,ID>>
+public abstract class AbstractService<T extends IEntity<ID>,ID>
 {
-    @Autowired private S repository;
+    private JpaRepository<T,ID> repository;
+
+    public AbstractService(JpaRepository<T,ID> repository) {this.repository = repository;}
 
     public List<T> getAll()
     {

@@ -5,4 +5,10 @@ import com.brendamareco.portfolio.repositories.ProjectRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProjectService extends AbstractService<Project, Long, ProjectRepository> { }
+public class ProjectService extends AbstractService<Project, Long>
+{
+    public ProjectService(ProjectRepository repository)
+    {
+        super(repository);
+    }
+}

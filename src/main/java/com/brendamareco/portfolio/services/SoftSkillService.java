@@ -5,5 +5,10 @@ import com.brendamareco.portfolio.repositories.SoftSkillRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SoftSkillService extends AbstractService<SoftSkill, Long, SoftSkillRepository>
-{ }
+public class SoftSkillService extends AbstractService<SoftSkill, Long>
+{
+    public SoftSkillService(SoftSkillRepository repository)
+    {
+        super(repository);
+    }
+}

@@ -3,7 +3,6 @@ package com.brendamareco.portfolio.controllers;
 import com.brendamareco.portfolio.interfaces.IEntity;
 import com.brendamareco.portfolio.services.AbstractService;
 import jakarta.validation.Valid;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +10,9 @@ import java.util.List;
 
 public abstract class AbstractController<T extends IEntity<ID>,ID>
 {
-    private AbstractService<T, ID, ? extends JpaRepository<T,ID>> service;
+    private AbstractService<T, ID> service;
 
-    AbstractController(AbstractService<T, ID, ? extends JpaRepository<T,ID>> service)
+    AbstractController(AbstractService<T, ID> service)
     {
         this.service = service;
     }

@@ -27,5 +27,5 @@ public class Language implements IEntity<Long>
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    LanguageLevel languageLevel;
+    LanguageLevel level;
 }

@@ -22,19 +22,19 @@ public class Education implements IEntity<Long>
     @NotBlank
     @Pattern(regexp = "^.{1,120}$",
             message = "Institution length must be greater than or equal to 1 and" +
-                    " less than 64")
+                    " less than 120")
     private String institution;
     @NotBlank
     @Pattern(regexp = "^.{1,120}$",
             message = "Title length must be greater than or equal to 1 and" +
-                    " less than 64")
+                    " less than 120")
     private String title;
 
     @Pattern(regexp = "^.{0,1024}$",
-            message = "Description length must be less than 64")
+            message = "Description length must be less than 1024")
     private String description;
     @Pattern(regexp = "^.{0,2048}$",
-            message = "Thumbnail length must be less than 64")
+            message = "Thumbnail length must be less than 2048")
     private String thumbnail;
 
     @Embedded

@@ -19,7 +19,7 @@ public class SoftSkill implements IEntity<Long>
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(message = "Name is mandatory")
-    @Pattern(regexp = "^.{1,44}$",
+    @Pattern(regexp = "^.{1,45}$",
             message = "Name length must be greater than or equal to 1 and" +
                     " less than or equal to 45")
     private String name;

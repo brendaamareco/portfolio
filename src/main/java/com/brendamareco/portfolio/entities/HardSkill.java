@@ -2,8 +2,8 @@ package com.brendamareco.portfolio.entities;
 
 import com.brendamareco.portfolio.interfaces.IEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,9 +23,9 @@ public class HardSkill implements IEntity<Long>
     @NotBlank
     @Pattern(regexp = "^.{1,45}$",
             message = "Name length must be greater than or equal to 1 and" +
-                    " less than 64")
+                    " less than 45")
     private String name;
-    @NotBlank
-    @Range(min = 0,max = 1)
+    @NotNull
+    @Range(min = 0,max = 100)
     private float level;
 }

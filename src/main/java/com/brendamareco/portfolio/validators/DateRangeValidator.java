@@ -9,6 +9,7 @@ public class DateRangeValidator implements ConstraintValidator<ValidDateRange, D
     @Override
     public boolean isValid(DateRange value, ConstraintValidatorContext context)
     {
-        return value.getStartDate().before(value.getEndDate());
+        return value.getStartDate().before(value.getEndDate())
+                || value.getStartDate().equals(value.getEndDate());
     }
 }

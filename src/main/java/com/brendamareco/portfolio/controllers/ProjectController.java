@@ -4,7 +4,7 @@ import com.brendamareco.portfolio.entities.Project;
 import com.brendamareco.portfolio.services.ProjectService;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200/", maxAge = 3600)
 @RestController
 @RequestMapping("/api/projects")
 public class ProjectController extends AbstractController<Project, Long>

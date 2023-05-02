@@ -16,7 +16,6 @@ import com.brendamareco.portfolio.dto.JwtRequest;
 import com.brendamareco.portfolio.dto.JwtResponse;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/", maxAge = 3600, allowedHeaders = "*")
 public class JwtAuthenticationController
 {
     @Autowired

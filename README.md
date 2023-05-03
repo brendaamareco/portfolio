@@ -1,10 +1,10 @@
 # Portfolio
 
-Este proyecto fue generado en SpringBoot version 3.0.5. Se utilizó MySQL 8
+Este proyecto fue generado con `SpringBoot 3.0.5`. Se utilizó `MySQL 8`
 
 ## Documentación de la API
-* HTML: /swagger-ui/index.html
-* JSON: /v3/api-docs
+* HTML: `/swagger-ui/index.html`
+* JSON: `/v3/api-docs`
 
 ## Environments
 
